@@ -1,0 +1,14 @@
++ Product: id, name, dateSupport, price ,id_brand, id_type, status , update_at,create_at
++ Brand: id, name,status, update_at,create_at
++ TypeWatch: id, name, status, update_at,create_at
++ GenderWatch: id, name,status, update_at,create_at
++ Order: id, customer_id, update_at,create_at
++ User: id, username, password, email,status , update_at,create_at
++ Customer: id, name, address, phone, email, status, note ,update_at,create_at
++ Bill: id, name, ,update_at,create_at
++ ProductOrder: id , product_id, order_id, quantity, update_at, create_at
+
++ Transport: id, name, price, unit, status, update_at, create_at
+
++TOKEN: RzSr43V2AVoV-6C61Nyz
+
