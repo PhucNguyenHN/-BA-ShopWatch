@@ -43,8 +43,8 @@ public class BrandController {
 		return brandService.updateBrandnew(brandDTO);
 	}
 	
-	@DeleteMapping("/brand")
-	public void deleteBrand(int id) {
+	@DeleteMapping("/brand/{id}")
+	public void deleteBrand(@PathVariable int id) {
 		brandService.deleteBrandById(id);
 	} 
 }

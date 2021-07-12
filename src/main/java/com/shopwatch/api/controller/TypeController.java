@@ -46,8 +46,8 @@ public class TypeController {
 		return typeService.updateTypeWatch(typeDTO);
 	}
 	
-	@DeleteMapping("/type")
-	public void deleteTypeWatch(int id) {
+	@DeleteMapping("/type/{id}")
+	public void deleteTypeWatch(@PathVariable int id) {
 		typeService.deleteTypeWatchById(id);;
 	}
 }

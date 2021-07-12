@@ -45,8 +45,8 @@ public class GenderController {
 		return genderService.updateGender(genderDTO);
 	}
 	
-	@DeleteMapping("/gender")
-	public void deleteGenderWatch(int id) {
+	@DeleteMapping("/gender/{id}")
+	public void deleteGenderWatch(@PathVariable int id) {
 		genderService.deleteWatchById(id);;
 	}
 }
