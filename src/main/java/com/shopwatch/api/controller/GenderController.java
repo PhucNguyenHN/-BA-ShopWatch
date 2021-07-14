@@ -3,6 +3,7 @@ package com.shopwatch.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,26 +26,31 @@ public class GenderController {
 	@Autowired
 	private GenderService genderService;
 	
+	@CrossOrigin
 	@GetMapping("/gender/{id}")
 	public GenderWatch findGenderById(@PathVariable int id){
 		return genderService.findById(id);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/gender")
 	public List<GenderWatch> findAllGenderWatchByDB(){
 		return genderService.findAllGenderWatch();
 	}
 	
+	@CrossOrigin
 	@PostMapping("/gender")
 	public GenderWatch createGenderWatch(@RequestBody GenderDTO genderDTO) {
 		return genderService.createGenderWatch(genderDTO);
 	}
 	
+	@CrossOrigin
 	@PutMapping("/gender")
 	public GenderWatch updateGenderWatch(@RequestBody GenderDTO genderDTO) {
 		return genderService.updateGender(genderDTO);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/gender/{id}")
 	public void deleteGenderWatch(@PathVariable int id) {
 		genderService.deleteWatchById(id);;

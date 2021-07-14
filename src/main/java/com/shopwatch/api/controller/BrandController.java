@@ -3,6 +3,7 @@ package com.shopwatch.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,19 @@ public class BrandController {
 	@Autowired
 	private BrandService brandService;
 	
+	@CrossOrigin
 	@GetMapping("/brand/{id}")
 	public Brand findBrandById(@PathVariable int id){
 		return brandService.findById(id);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/brand")
 	public List<Brand> findAllBrandByDB(){
 		return brandService.selectAllBrand();
 	}
 	
+	@CrossOrigin
 	@PostMapping("/brand")
 	public Brand createBrand(@RequestBody BrandDTO brandDTO) {
 		return brandService.createNewBrand(brandDTO);

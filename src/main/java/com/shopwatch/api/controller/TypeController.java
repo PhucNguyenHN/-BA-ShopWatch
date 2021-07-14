@@ -3,6 +3,7 @@ package com.shopwatch.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,26 +27,31 @@ public class TypeController {
 	@Autowired
 	private TypeService typeService;
 	
+	@CrossOrigin
 	@GetMapping("/type/{id}")
 	public TypeWatch findTypeWatchById(@PathVariable int id){
 		return typeService.findById(id);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/type")
 	public List<TypeWatch> findAllTypeWatchByDB(){
 		return typeService.findAllTypeWatch();
 	}
 	
+	@CrossOrigin
 	@PostMapping("/type")
 	public TypeWatch createTypeWatch(@RequestBody TypeDTO typeDTO) {
 		return typeService.createTypeWatch(typeDTO);
 	}
 	
+	@CrossOrigin
 	@PutMapping("/type")
 	public TypeWatch updateTypeWatch(@RequestBody TypeDTO typeDTO) {
 		return typeService.updateTypeWatch(typeDTO);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/type/{id}")
 	public void deleteTypeWatch(@PathVariable int id) {
 		typeService.deleteTypeWatchById(id);;
