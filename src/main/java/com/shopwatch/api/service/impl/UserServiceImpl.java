@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		User user = new User();
-		user.setUsername(userDTO.getUsername());
 		user.setPassword(userDTO.getPassword());
 		user.setEmail(userDTO.getEmail());
 		user.setStatus(true);

@@ -15,5 +15,5 @@ public interface GenderService {
 	
 	GenderWatch updateGender(GenderDTO genderDTO);
 	
-	void deleteWatchById(int id);
+	boolean deleteWatchById(int id);
 }

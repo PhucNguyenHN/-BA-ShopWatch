@@ -2,6 +2,7 @@ package com.shopwatch.api.service;
 
 import java.util.List;
 
+import com.shopwatch.api.dto.ProductDTO;
 import com.shopwatch.api.entity.Product;
 
 public interface ProductService {
@@ -10,7 +11,9 @@ public interface ProductService {
 	
 	List<Product> findAllProduct();
 	
-	Product updateTypeWatch(Product product);
+	Product createProduct(ProductDTO productDTO);
+	
+	Product updateProduct(ProductDTO productDTO);
 	
 	boolean deleteProductById(int id);
 }

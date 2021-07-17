@@ -16,18 +16,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "customer")
-public class Customer {
+@Table(name = "colorwatch")
+public class ColorWatch {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String fistname;
-	private String lastname;
-	private String address;
-	private int phone;
-	private String note;
+	private String name;
 	private boolean status;
 	
 	@Temporal(TemporalType.TIMESTAMP)

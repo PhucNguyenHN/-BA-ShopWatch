@@ -15,5 +15,5 @@ public interface BrandService {
 	
 	Brand updateBrandnew(BrandDTO brandDTO);
 	
-	void deleteBrandById(int id);
+	boolean deleteBrandById(int id);
 }

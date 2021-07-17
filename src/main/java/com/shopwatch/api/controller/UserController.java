@@ -14,6 +14,7 @@ import com.shopwatch.api.dto.UserDTO;
 import com.shopwatch.api.entity.User;
 import com.shopwatch.api.service.UserService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/api")
 public class UserController {

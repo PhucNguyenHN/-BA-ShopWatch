@@ -15,5 +15,5 @@ public interface TypeService {
 	
 	TypeWatch updateTypeWatch(TypeDTO typeDTO);
 	
-	void deleteTypeWatchById(int id);
+	boolean deleteTypeWatchById(int id);
 }

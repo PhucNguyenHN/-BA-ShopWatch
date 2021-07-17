@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,18 +18,21 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "transport")
-public class Transport {
+@Table(name = "bill")
+public class Bill {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
-	private int price;
-	private String unit;
-	private String images;
-	private boolean status;
+	@ManyToOne
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
+	
+	private String phone;
+	private String address;
+	private int total_money;
+	private int status_bill;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:MI:SS")
@@ -36,4 +41,5 @@ public class Transport {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:MI:SS")
 	private Date update_at;
+
 }

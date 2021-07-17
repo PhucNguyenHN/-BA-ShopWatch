@@ -50,21 +50,31 @@ public class GenderServiceImpl implements GenderService {
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		GenderWatch gender = genderRepo.findById(genderDTO.getId());
-		gender.setName(genderDTO.getName());
-		
-		gender.setUpdate_at(datetimeNow);
-		return genderRepo.save(gender);
+		//Check Name da ton tai
+		GenderWatch genderWatch = genderRepo.findByNameAndStatus(genderDTO.getName(), true);
+		if (genderWatch == null || genderDTO.getName().equals(gender.getName())) {
+			gender.setName(genderDTO.getName());
+			gender.setUpdate_at(datetimeNow);
+			return genderRepo.save(gender);
+		}
+		return null;
 	}
 
 	@Override
-	public void deleteWatchById(int id) {
+	public boolean deleteWatchById(int id) {
 
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		GenderWatch genderWatch = genderRepo.findById(id);
-		genderWatch.setStatus(false);
-		genderWatch.setUpdate_at(datetimeNow);
-		genderRepo.save(genderWatch);
+		boolean result = false;
+		if (genderWatch.isStatus()) {
+			genderWatch.setStatus(false);
+			genderWatch.setUpdate_at(datetimeNow);
+			if (genderRepo.save(genderWatch) != null) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 }

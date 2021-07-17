@@ -26,7 +26,6 @@ public class BrandServiceImpl implements BrandService{
 	@Override
 	public List<Brand> selectAllBrand() {
 		// TODO Auto-generated method stub
-		System.out.println("select all");
 		return brandRepo.customSelectBrand(true);
 	}
 
@@ -52,23 +51,34 @@ public class BrandServiceImpl implements BrandService{
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		Brand brand = brandRepo.findById(brandDTO.getId());
-		brand.setName(brandDTO.getName());
-		brand.setImages(brandDTO.getImages());
+		// check Name da ton tai
+		Brand brandCheck = brandRepo.findByNameAndStatus(brandDTO.getName(), true);
+		if (brandDTO.getName().equals(brand.getName()) || brandCheck == null) {
+			brand.setName(brandDTO.getName());
+			brand.setImages(brandDTO.getImages());
+			
+			brand.setUpdate_at(datetimeNow);
+			
+			return brandRepo.save(brand);
+		}
 		
-		brand.setUpdate_at(datetimeNow);
-		
-		return brandRepo.save(brand);
+		return null;
 	}
 
 	@Override
-	public void deleteBrandById(int id) {
+	public boolean deleteBrandById(int id) {
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		Brand brand = brandRepo.findById(id);
-		
-		brand.setStatus(false);
-		brand.setUpdate_at(datetimeNow);
-		brandRepo.save(brand);
+		boolean result = false;
+		if (brand.isStatus()) {
+			brand.setStatus(false);
+			brand.setUpdate_at(datetimeNow);
+			if (brandRepo.save(brand) != null) {
+				result = true;
+			} 
+		} 	
+		return result;
 		
 	}
 

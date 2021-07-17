@@ -29,14 +29,14 @@ public class Cart {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "transport_id")
-	private Transport transport;
+	@JoinColumn(name = "payment_id")
+	private Payment payment;
 	
-	private int number_transport;
+	private boolean status;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:MI:SS")

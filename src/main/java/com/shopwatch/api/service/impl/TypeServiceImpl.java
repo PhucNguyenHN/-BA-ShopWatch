@@ -51,20 +51,30 @@ public class TypeServiceImpl implements TypeService{
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		TypeWatch type = typeRepo.findById(typeDTO.getId());
-		type.setName(typeDTO.getName());
-		
-		type.setUpdate_at(datetimeNow);
-		return typeRepo.save(type);
+		//Check Name da ton tai
+		TypeWatch typeWatch = typeRepo.findByNameAndStatus(typeDTO.getName(), true);
+		if (typeWatch == null || typeDTO.getName().equals(type.getName())) {
+			type.setName(typeDTO.getName());
+			type.setUpdate_at(datetimeNow);
+			return typeRepo.save(type);
+		}
+		return null;
 	}
 
 	@Override
-	public void deleteTypeWatchById(int id) {
+	public boolean deleteTypeWatchById(int id) {
 		Date datetimeNow = new Date();
+		boolean result = false;
 		// TODO Auto-generated method stub
 		TypeWatch typeWatch = typeRepo.findById(id);
-		typeWatch.setStatus(false);
-		typeWatch.setUpdate_at(datetimeNow);
-		typeRepo.save(typeWatch);
+		if (typeWatch.isStatus()) {
+			typeWatch.setStatus(false);
+			typeWatch.setUpdate_at(datetimeNow);
+			if (typeRepo.save(typeWatch) != null) {
+				result = true;
+			}
+		}		
+		return result;
 	}
 
 }
