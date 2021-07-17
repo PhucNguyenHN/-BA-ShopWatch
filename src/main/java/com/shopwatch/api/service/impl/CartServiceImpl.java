@@ -67,7 +67,7 @@ public class CartServiceImpl implements CartService{
 	public List<Cart> getCartByUserId(int user_id) {
 		// TODO Auto-generated method stub
 		User user = userRepository.findById(user_id);
-		List<Cart> listCart = cartRepository.findByUserid(user);
+		List<Cart> listCart = cartRepository.findByUser(user);
 		
 		return listCart;
 	}

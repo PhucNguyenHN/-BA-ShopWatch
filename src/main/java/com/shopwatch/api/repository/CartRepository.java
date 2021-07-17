@@ -10,7 +10,8 @@ import com.shopwatch.api.entity.User;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer>{
+	
 	Cart findById(int id);
 	
-	List<Cart> findByUserid(User user);
+	List<Cart> findByUser(User user);
 }
