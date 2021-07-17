@@ -61,20 +61,20 @@ public class BillServiceImpl implements BillService {
 	}
 
 	@Override
-	public Bill changeContinueBill(int bill_id) {
+	public Bill changeContinueBill(int id) {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
-		Bill bill = billRepository.findById(bill_id);
+		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(1);
 		bill.setUpdate_at(datetimeNow);
 		return billRepository.save(bill);
 	}
 
 	@Override
-	public Bill changeDoneBill(int bill_id) {
+	public Bill changeDoneBill(int id) {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
-		Bill bill = billRepository.findById(bill_id);
+		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(2);
 		bill.setUpdate_at(datetimeNow);
 		return billRepository.save(bill);

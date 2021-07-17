@@ -28,9 +28,9 @@ public class BillController {
 	
 	@CrossOrigin
 	@GetMapping("/bill/{id}")
-	ResponseResult<Bill> findBillById(@PathVariable int bill_id){
+	ResponseResult<Bill> findBillById(@PathVariable int id){
 		String mgs;
-		Bill bill = billService.findBillById(bill_id);
+		Bill bill = billService.findBillById(id);
 		if (bill != null) {
 			mgs = "Bill cần tìm!";
 		} else {
@@ -55,27 +55,27 @@ public class BillController {
 	}
 	
 	@CrossOrigin
-	@PutMapping("/bill/continueBill")
-	ResponseResult<Bill> UpdateContinueBill(@RequestBody int bill_id){
+	@PutMapping("/bill/continueBill/{id}")
+	ResponseResult<Bill> UpdateContinueBill(@PathVariable int id){
 		String mgs;
-		Bill bill = billService.changeContinueBill(bill_id);
+		Bill bill = billService.changeContinueBill(id);
 		if (bill != null) {
-			mgs = "Chuyển trạng thái thành công!";
+			mgs = "Chuyển trạng thái Đã Thanh Toán thành công!";
 		} else {
-			mgs = "Chuyển trạng thái thất bại!";
+			mgs = "Chuyển trạng thái Đã Thanh Toán thất bại!";
 		}
 		return new ResponseResult<Bill>(mgs, bill);
 	}
 	
 	@CrossOrigin
-	@PutMapping("/bill/doneBill")
-	ResponseResult<Bill> UpdateDoneBill(@RequestBody int bill_id){
+	@PutMapping("/bill/doneBill/{id}")
+	ResponseResult<Bill> UpdateDoneBill(@PathVariable int id){
 		String mgs;
-		Bill bill = billService.changeDoneBill(bill_id);
+		Bill bill = billService.changeDoneBill(id);
 		if (bill != null) {
-			mgs = "Chuyển trạng thái thành công!";
+			mgs = "Chuyển trạng thái Đã Hủy thành công!";
 		} else {
-			mgs = "Chuyển trạng thái thất bại!";
+			mgs = "Chuyển trạng thái Đã Hủy thất bại!";
 		}
 		return new ResponseResult<Bill>(mgs, bill);
 	}

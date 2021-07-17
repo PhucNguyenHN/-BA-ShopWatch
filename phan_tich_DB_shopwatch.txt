@@ -1,14 +1,23 @@
-+ Product: id, name, dateSupport, price ,id_brand, id_type, status , update_at,create_at
-+ Brand: id, name,status, update_at,create_at
-+ TypeWatch: id, name, status, update_at,create_at
-+ GenderWatch: id, name,status, update_at,create_at
-+ Order: id, customer_id, update_at,create_at
-+ User: id, username, password, email,status , update_at,create_at
-+ Customer: id, name, address, phone, email, status, note ,update_at,create_at
-+ Bill: id, name, ,update_at,create_at
-+ ProductOrder: id , product_id, order_id, quantity, update_at, create_at
++ Product: id, name, description, price_old, price_new ,images ,color_id ,brand_id, type_id,gender_id, status, ,update_at,create_at. ~
 
-+ Transport: id, name, price, unit, status, update_at, create_at
++ Brand: id, name,status, images, update_at,create_at. ~
 
-+TOKEN: RzSr43V2AVoV-6C61Nyz
++ TypeWatch: id, name, status, update_at,create_at. ~
 
++ ColorWatch: id, name,status, update_at,create_at. ~
+
++ GenderWatch: id, name,status, update_at,create_at. ~
+
++ Cart: id, user_id, payment_id, status ,update_at,create_at. ~
+
++ ProductCart: id , product_id, cart_id, quantity, price_final, total_item, update_at, create_at. ~
+
++ User: id, fullname, email, password, phone, status, role_id, update_at,create_at. ~
+
++ Bill: id, cart_id, phone, address, total_money, status_bill(INT) ,update_at,create_at. ~
+
++ Payment: id, name, description, status, update_at, create_at. (truc tiep ,ship_code) ~
+
++ Role: id, name. ~
+
++ Sale: id, name, percent, satus, update_at, create_at. ~

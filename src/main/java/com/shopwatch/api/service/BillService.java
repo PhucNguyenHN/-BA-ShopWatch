@@ -11,9 +11,9 @@ public interface BillService {
 	
 	Bill createNewBill(BillDTO billDTO);
 	
-	Bill changeContinueBill(int bill_id);
+	Bill changeContinueBill(int id);
 	
-	Bill changeDoneBill(int bill_id);
+	Bill changeDoneBill(int id);
 	
 	List<Bill> selectAllBill();
 }

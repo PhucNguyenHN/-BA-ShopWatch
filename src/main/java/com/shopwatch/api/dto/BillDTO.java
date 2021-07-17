@@ -9,5 +9,4 @@ public class BillDTO {
 	private String phone;
 	private String address;
 	private int total_money;
-	private int status_bill;
 }
