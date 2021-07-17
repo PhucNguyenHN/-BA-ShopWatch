@@ -31,20 +31,25 @@ public class CartServiceImpl implements CartService{
 	public Cart createCart(CartDTO cartDTO) {
 		Date datetimeNow = new Date();
 		User user = userRepository.findById(cartDTO.getUser_id());
+		Cart cartCheck = cartRepository.findByUserAndStatus(user, true);
 		// TODO Auto-generated method stub
-		Cart cart = new Cart();
-		if (user != null) {
-			cart.setUser(user);
-		}else{
-			cart.setUser(null);
+		if (cartCheck == null) {
+			Cart cart = new Cart();
+			if (user != null) {
+				cart.setUser(user);
+			}else{
+				cart.setUser(null);
+			}
+			cart.setPayment(null);
+			cart.setStatus(true);
+			cart.setCreate_at(datetimeNow);
+			cart.setUpdate_at(datetimeNow);
+			
+			
+			return cartRepository.save(cart);
 		}
-		cart.setPayment(null);
-		cart.setStatus(true);
-		cart.setCreate_at(datetimeNow);
-		cart.setUpdate_at(datetimeNow);
 		
-		
-		return cartRepository.save(cart);
+		return cartCheck;
 	}
 
 	@Override

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shopwatch.api.controller.result.ResponseResult;
 import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.dto.ProductCartDTO;
+import com.shopwatch.api.dto.UpdateCartDTO;
 import com.shopwatch.api.entity.Cart;
 import com.shopwatch.api.entity.Product;
 import com.shopwatch.api.entity.ProductCart;
+import com.shopwatch.api.repository.ProductCartRepository;
 import com.shopwatch.api.service.ProductCartService;
 import com.shopwatch.api.service.CartService;
 
@@ -31,6 +33,8 @@ public class CartController {
 	private CartService cartService;
 	@Autowired
 	private ProductCartService productCartService;
+	@Autowired
+	private ProductCartRepository productCartRepository;
 	
 	@CrossOrigin
 	@GetMapping("cart/{id}")
@@ -76,23 +80,26 @@ public class CartController {
 	
 	@CrossOrigin
 	@PutMapping("cart/updatetocart")
-	ResponseResult<Cart> UpdateToCart(@RequestBody int productCart_id,@RequestBody int quantity){
+	ResponseResult<Cart> UpdateToCart(@RequestBody UpdateCartDTO updateCartDTO){
 		String mgs;
-		Cart cart = cartService.findById(productCart_id);
-		ProductCart productCart = productCartService.updateProductCart(productCart_id, quantity);
+		ProductCart productCartCheck = productCartRepository.findById(updateCartDTO.getProductCart_id());
+		
+		ProductCart productCart = productCartService.updateProductCart(updateCartDTO);
 		if (productCart != null) {
 			mgs = "Update Cart thanh cong!";
 		}else {
-			mgs = "Update Cart tht bai!";
+			mgs = "Update Cart that bai!";
 		}
+		Cart cart = cartService.findById(productCartCheck.getCart().getId());
 		
 		return new ResponseResult<Cart>(mgs, cart);
 	}
 	
+	//delete Product on Cart
 	@CrossOrigin
-	@DeleteMapping("cart/deletetocart")
-	ResponseResult<Object> deteteProductToCart(@RequestBody int productCart_id){
-		boolean check = productCartService.deleteProductCart(productCart_id);
+	@DeleteMapping("cart/deletetocart/{id}")
+	ResponseResult<Object> deteteProductToCart(@PathVariable int id){
+		boolean check = productCartService.deleteProductCart(id);
 		if (check) {
 			return new ResponseResult<Object>("Xoa thanh cong!", null);
 		} else {

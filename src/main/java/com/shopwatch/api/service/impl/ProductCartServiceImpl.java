@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shopwatch.api.dto.ProductCartDTO;
+import com.shopwatch.api.dto.UpdateCartDTO;
 import com.shopwatch.api.entity.Cart;
 import com.shopwatch.api.entity.Product;
 import com.shopwatch.api.entity.ProductCart;
@@ -51,10 +52,10 @@ public class ProductCartServiceImpl implements ProductCartService{
 	}
 
 	@Override
-	public boolean deleteProductCart(int productCart_id) {
+	public boolean deleteProductCart(int id) {
 		boolean result = false;
 		// TODO Auto-generated method stub
-		ProductCart productCart = productCartRepository.findById(productCart_id);
+		ProductCart productCart = productCartRepository.findById(id);
 		if (productCart != null) {
 			productCartRepository.delete(productCart);
 			result = true;
@@ -63,12 +64,12 @@ public class ProductCartServiceImpl implements ProductCartService{
 	}
 
 	@Override
-	public ProductCart updateProductCart(int productCart_id, int quantity) {
+	public ProductCart updateProductCart(UpdateCartDTO updateCartDTO) {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
-		ProductCart productCart = productCartRepository.findById(productCart_id);
-		productCart.setQuantity(quantity);
-		productCart.setTotal_item(quantity * productCart.getPrice_final());
+		ProductCart productCart = productCartRepository.findById(updateCartDTO.getProductCart_id());
+		productCart.setQuantity(updateCartDTO.getQuantity());
+		productCart.setTotal_item(updateCartDTO.getQuantity() * productCart.getPrice_final());
 		productCart.setUpdate_at(datetimeNow);
 		return productCartRepository.save(productCart);
 	}

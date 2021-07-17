@@ -25,7 +25,7 @@ public class Payment {
 	private int id;
 	
 	private String name;
-	private String desc;
+	private String description;
 	private boolean status;
 	
 	@Temporal(TemporalType.TIMESTAMP)

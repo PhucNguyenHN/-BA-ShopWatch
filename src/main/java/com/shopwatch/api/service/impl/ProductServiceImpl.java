@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 		if (productCheck == null) {
 			Product product = new Product();
 			product.setName(productDTO.getName());
-			product.setDesc(productDTO.getDesc());
+			product.setDescription(productDTO.getDescription());
 			product.setPrice_old(productDTO.getPrice_old());
 			product.setPrice_new(productDTO.getPrice_new());
 			product.setImages(productDTO.getImages());
@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
 		Product productCheck = productRepository.findByNameAndStatus(productDTO.getName(), true);
 		if (productDTO.getName().equals(product.getName()) || productCheck == null) {
 			product.setName(productDTO.getName());
-			product.setDesc(productDTO.getDesc());
+			product.setDescription(productDTO.getDescription());
 			product.setPrice_old(productDTO.getPrice_old());
 			product.setPrice_new(productDTO.getPrice_new());
 			product.setImages(productDTO.getImages());

@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -31,6 +33,7 @@ public class ProductCart {
 	
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
+	@JsonIgnore
 	private Cart cart;
 	
 	private int quantity;
