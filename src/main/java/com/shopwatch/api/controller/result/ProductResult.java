@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductResult {
+	private int id;
 	private String name;
 	private int price_old;
 	private int price_new;
