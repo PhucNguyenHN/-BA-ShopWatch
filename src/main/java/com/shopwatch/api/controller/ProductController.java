@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shopwatch.api.controller.result.ProductResult;
 import com.shopwatch.api.controller.result.ResponseResult;
 import com.shopwatch.api.dto.BrandDTO;
 import com.shopwatch.api.dto.ProductDTO;
@@ -45,16 +46,17 @@ public class ProductController {
 	
 	@CrossOrigin
 	@GetMapping("/product")
-	ResponseResult<List<Product>> findAllProductByDB(){
+	ResponseResult<List<ProductResult>> findAllProductByDB(){
 //		return brandService.selectAllBrand();
 		String mgs;
-		List<Product> listProduct = productService.findAllProduct();
-		if (!listProduct.isEmpty()) {
+		List<ProductResult> listProductResult = productService.findAllProduct();
+		
+		if (!listProductResult.isEmpty()) {
 			mgs = "Tất cả các Product.";
 		} else {
 			mgs = "Bảng Product rỗng.";
 		}
-		return new ResponseResult<List<Product>>(mgs, listProduct);
+		return new ResponseResult<List<ProductResult>>(mgs, listProductResult);
 	}
 	
 	@CrossOrigin

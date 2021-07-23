@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shopwatch.api.controller.result.ProductResult;
 import com.shopwatch.api.dto.ProductDTO;
 import com.shopwatch.api.entity.Brand;
 import com.shopwatch.api.entity.ColorWatch;
@@ -40,9 +41,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findAllProduct() {
+	public List<ProductResult> findAllProduct() {
 		// TODO Auto-generated method stub
-		return productRepository.customSelectAllProduct(true);
+		return productRepository.selectAllProductResult(true);
 	}
 
 	@Override
