@@ -51,16 +51,30 @@ public class CartController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("cart/checkByUserId/{id}")
+	ResponseResult<Cart> CheckCartByUserId(@PathVariable int id) {
+		String mgs;
+		Cart cart = cartService.findByUseridAndStatusTrue(id);
+		if (cart != null) {
+			mgs = "User này đang có Cart tồn tại!";
+		} else {
+			mgs = "User này ko tồn tại Giỏ hàng!";
+		}
+
+		return new ResponseResult<Cart>(mgs, cart);
+	}
+	
+	@CrossOrigin
 	@PostMapping("/cart")
 	ResponseResult<Cart> createNewCart(@RequestBody CartDTO cartDTO){
 		String mgs;
 		Cart cart = cartService.createCart(cartDTO);
 		if (cart != null) {
-			mgs = "Tao moi Cart thanh cong!";
+			mgs = "Tạo mới Cart thành công!";
 			return new ResponseResult<Cart>(mgs, cart);
 		}
 		
-		return new ResponseResult<Cart>("Tao moi that bai!", cart);
+		return new ResponseResult<Cart>("Tạo mới thất bại!", cart);
 	}
 	
 	@CrossOrigin
@@ -70,9 +84,9 @@ public class CartController {
 		Cart cart = cartService.findById(productCartDTO.getCart_id());
 		if (cart != null) {
 			productCartService.addProductCart(productCartDTO);
-			mgs = "Add To Cart thanh cong!";
+			mgs = "Add To Cart thành côg!";
 		} else {
-			mgs = "Add To Cart that bai!";
+			mgs = "Add To Cart thất bại!";
 		}
 
 		return new ResponseResult<Cart>(mgs, cart);
@@ -86,9 +100,9 @@ public class CartController {
 		
 		ProductCart productCart = productCartService.updateProductCart(updateCartDTO);
 		if (productCart != null) {
-			mgs = "Update Cart thanh cong!";
+			mgs = "Update Cart thành công!";
 		}else {
-			mgs = "Update Cart that bai!";
+			mgs = "Update Cart thất bại!";
 		}
 		Cart cart = cartService.findById(productCartCheck.getCart().getId());
 		
@@ -101,9 +115,9 @@ public class CartController {
 	ResponseResult<Object> deteteProductToCart(@PathVariable int id){
 		boolean check = productCartService.deleteProductCart(id);
 		if (check) {
-			return new ResponseResult<Object>("Xoa thanh cong!", null);
+			return new ResponseResult<Object>("Xóa thành công!", null);
 		} else {
-			return new ResponseResult<Object>("Xoa That Bai!", null);
+			return new ResponseResult<Object>("Xóa Thất Bại!", null);
 		}
 	}
 }

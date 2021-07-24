@@ -1,5 +1,7 @@
 package com.shopwatch.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,20 @@ public class BillController {
 		}
 		
 		return new ResponseResult<Bill>(mgs, bill);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/bill")
+	ResponseResult<List<Bill>> findAllBill(){
+		String mgs;
+		List<Bill> listBill = billService.selectAllBill();
+		if (listBill != null) {
+			mgs = "Tất cả các Bill.";
+		} else {
+			mgs = "Bảng Bill rỗng!";
+		}
+		
+		return new ResponseResult<List<Bill>>(mgs, listBill);
 	}
 	
 	@CrossOrigin

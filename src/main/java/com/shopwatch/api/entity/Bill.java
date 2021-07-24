@@ -29,6 +29,7 @@ public class Bill {
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
 	
+	private String fullname;
 	private String phone;
 	private String address;
 	private int total_money;

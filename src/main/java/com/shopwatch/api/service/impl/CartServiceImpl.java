@@ -76,4 +76,16 @@ public class CartServiceImpl implements CartService{
 		
 		return listCart;
 	}
+
+	@Override
+	public Cart findByUseridAndStatusTrue(int id) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findById(id);
+		if (user != null) {
+			Cart cart = cartRepository.findByUserAndStatus(user, true);
+			return cart;
+		}else {
+			return null;
+		}
+	}
 }

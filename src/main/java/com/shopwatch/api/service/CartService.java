@@ -13,4 +13,6 @@ public interface CartService {
 	boolean changeStatusCart(int id);
 	
 	List<Cart> getCartByUserId(int user_id);
+	
+	Cart findByUseridAndStatusTrue(int id);
 }

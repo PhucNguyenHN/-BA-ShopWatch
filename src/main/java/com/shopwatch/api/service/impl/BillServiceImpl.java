@@ -38,6 +38,7 @@ public class BillServiceImpl implements BillService {
 		Cart cart = cartRepository.findById(billDTO.getCart_id());
 		Bill bill = new Bill();
 		bill.setCart(cart);
+		bill.setFullname(billDTO.getFullname());
 		bill.setPhone(billDTO.getPhone());
 		bill.setAddress(billDTO.getAddress());
 		bill.setTotal_money(billDTO.getTotal_money());
