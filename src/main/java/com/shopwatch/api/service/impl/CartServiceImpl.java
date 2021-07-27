@@ -30,7 +30,7 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public Cart createCart(CartDTO cartDTO) {
 		Date datetimeNow = new Date();
-		User user = userRepository.findById(cartDTO.getUser_id());
+		User user = userRepository.findById(Integer.parseInt(cartDTO.getUser_id()));
 		Cart cartCheck = cartRepository.findByUserAndStatus(user, true);
 		// TODO Auto-generated method stub
 		if (cartCheck == null) {

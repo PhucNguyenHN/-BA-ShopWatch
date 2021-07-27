@@ -81,7 +81,7 @@ public class CartController {
 	@PostMapping("cart/addtocart")
 	ResponseResult<Cart> AddToCart(@RequestBody ProductCartDTO productCartDTO) {
 		String mgs;
-		Cart cart = cartService.findById(productCartDTO.getCart_id());
+		Cart cart = cartService.findById(Integer.parseInt(productCartDTO.getCart_id()));
 		if (cart != null) {
 			productCartService.addProductCart(productCartDTO);
 			mgs = "Add To Cart thành côg!";

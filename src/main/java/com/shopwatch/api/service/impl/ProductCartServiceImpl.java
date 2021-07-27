@@ -30,8 +30,8 @@ public class ProductCartServiceImpl implements ProductCartService{
 		Date datetimeNow = new Date();
 		//GET Product , Cart By ID
 		Product product = productRepository.findById(productCartDTO.getProduct_id());
-		Cart cart = cartRepository.findById(productCartDTO.getCart_id());
-		ProductCart productCartCheck = productCartRepository.findByProductIdAndCartId(productCartDTO.getProduct_id(), productCartDTO.getCart_id());
+		Cart cart = cartRepository.findById(Integer.parseInt(productCartDTO.getCart_id()));
+		ProductCart productCartCheck = productCartRepository.findByProductIdAndCartId(productCartDTO.getProduct_id(), Integer.parseInt(productCartDTO.getCart_id()));
 		if (productCartCheck == null) {
 			ProductCart productCart = new ProductCart();
 			productCart.setProduct(product);

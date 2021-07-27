@@ -35,7 +35,7 @@ public class BillServiceImpl implements BillService {
 	public Bill createNewBill(BillDTO billDTO) {
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
-		Cart cart = cartRepository.findById(billDTO.getCart_id());
+		Cart cart = cartRepository.findById(Integer.parseInt(billDTO.getCart_id()));
 		Bill bill = new Bill();
 		bill.setCart(cart);
 		bill.setFullname(billDTO.getFullname());
