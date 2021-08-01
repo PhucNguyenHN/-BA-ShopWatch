@@ -16,6 +16,7 @@ import com.shopwatch.api.controller.result.BillResult;
 import com.shopwatch.api.controller.result.ResponseResult;
 import com.shopwatch.api.dto.BillDTO;
 import com.shopwatch.api.dto.BillProductDTO;
+import com.shopwatch.api.dto.BillUpdateDTO;
 import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.entity.Bill;
 import com.shopwatch.api.entity.Cart;
@@ -123,6 +124,19 @@ public class BillController {
 		}
 		
 		return new ResponseResult<Bill>(mgs, billProduct);
+	}
+	
+	@CrossOrigin
+	@PutMapping("/bill/updateProfile")
+	ResponseResult<Bill> UpdateProfileBill(@RequestBody BillUpdateDTO billUpdateDTO){
+		String mgs;
+		Bill bill = billService.updateProfileBill(billUpdateDTO);
+		if (bill != null) {
+			mgs = "Update Profile Hóa đơn thành công!";
+		} else {
+			mgs = "Update Profile Hóa đơn thất bại!";
+		}
+		return new ResponseResult<Bill>(mgs, bill);
 	}
 	
 }

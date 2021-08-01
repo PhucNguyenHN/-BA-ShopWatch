@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.shopwatch.api.controller.result.BillResult;
 import com.shopwatch.api.dto.BillDTO;
 import com.shopwatch.api.dto.BillProductDTO;
+import com.shopwatch.api.dto.BillUpdateDTO;
 import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.dto.ProductCartDTO;
 import com.shopwatch.api.entity.Bill;
@@ -138,6 +139,24 @@ public class BillServiceImpl implements BillService {
 		
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Bill updateProfileBill(BillUpdateDTO billUpdateDTO) {
+		// TODO Auto-generated method stub
+		Date datetimeNow = new Date();
+		Bill bill = billRepository.findById(billUpdateDTO.getBill_id());
+		if (bill != null) {
+			bill.setFullname(billUpdateDTO.getFullname());
+			bill.setEmail(billUpdateDTO.getEmail());
+			bill.setPhone(billUpdateDTO.getPhone());
+			bill.setAddress(billUpdateDTO.getAddress());
+			bill.setUpdate_at(datetimeNow);
+			
+			return billRepository.save(bill);
+			
+		}
+		return null;
 	}
 
 
