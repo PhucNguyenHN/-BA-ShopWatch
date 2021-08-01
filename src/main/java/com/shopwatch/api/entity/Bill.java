@@ -31,6 +31,7 @@ public class Bill {
 	
 	private String fullname;
 	private String phone;
+	private String email;
 	private String address;
 	private int total_money;
 	private int status_bill;

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shopwatch.api.controller.result.BillResult;
 import com.shopwatch.api.controller.result.ResponseResult;
 import com.shopwatch.api.dto.BillDTO;
+import com.shopwatch.api.dto.BillProductDTO;
 import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.entity.Bill;
 import com.shopwatch.api.entity.Cart;
@@ -44,16 +46,16 @@ public class BillController {
 	
 	@CrossOrigin
 	@GetMapping("/bill")
-	ResponseResult<List<Bill>> findAllBill(){
+	ResponseResult<List<BillResult>> findAllBill(){
 		String mgs;
-		List<Bill> listBill = billService.selectAllBill();
+		List<BillResult> listBill = billService.selectAllBill();
 		if (listBill != null) {
 			mgs = "Tất cả các Bill.";
 		} else {
 			mgs = "Bảng Bill rỗng!";
 		}
 		
-		return new ResponseResult<List<Bill>>(mgs, listBill);
+		return new ResponseResult<List<BillResult>>(mgs, listBill);
 	}
 	
 	@CrossOrigin
@@ -64,7 +66,7 @@ public class BillController {
 		if (bill != null) {
 			mgs = "Tạo mới Bill thành công!";
 		} else {
-			mgs = "Tạo mới Bill thành công!";
+			mgs = "Tạo mới Bill thất bại!";
 		}
 		
 		return new ResponseResult<Bill>(mgs, bill);
@@ -95,4 +97,32 @@ public class BillController {
 		}
 		return new ResponseResult<Bill>(mgs, bill);
 	}
+	
+	@CrossOrigin
+	@PutMapping("/bill/deliveryBill/{id}")
+	ResponseResult<Bill> UpdateDeliveryBill(@PathVariable int id){
+		String mgs;
+		Bill bill = billService.changeDeliveryBill(id);
+		if (bill != null) {
+			mgs = "Chuyển trạng thái Đang Giao Hàng thành công!";
+		} else {
+			mgs = "Chuyển trạng thái Đang Giao Hàng thất bại!";
+		}
+		return new ResponseResult<Bill>(mgs, bill);
+	}
+	
+	@CrossOrigin
+	@PostMapping("/createbillproduct")
+	ResponseResult<Bill> createBillProduct(@RequestBody BillProductDTO billProductDTO){
+		String mgs;
+		Bill billProduct = billService.changeBillProduct(billProductDTO);
+		if (billProduct != null) {
+			mgs = "Thành công!";
+		} else {
+			mgs = "Thất bại!";
+		}
+		
+		return new ResponseResult<Bill>(mgs, billProduct);
+	}
+	
 }
