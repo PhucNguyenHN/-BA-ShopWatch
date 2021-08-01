@@ -23,4 +23,10 @@ public class PaymentServiceImpl implements PaymentService{
 		return paymentRepository.findAll();
 	}
 
+	@Override
+	public Payment findById(int id) {
+		// TODO Auto-generated method stub
+		return paymentRepository.findById(id);
+	}
+
 }

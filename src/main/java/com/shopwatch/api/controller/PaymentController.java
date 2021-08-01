@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,6 @@ public class PaymentController {
 	@CrossOrigin
 	@GetMapping("/payment")
 	ResponseResult<List<Payment>> findAllPaymentByDB(){
-//		return brandService.selectAllBrand();
 		String mgs;
 		List<Payment> listPayment = paymentService.findAllPayment();
 		if (!listPayment.isEmpty()) {
@@ -33,5 +33,19 @@ public class PaymentController {
 			mgs = "Bảng Payment rỗng.";
 		}
 		return new ResponseResult<List<Payment>>(mgs, listPayment);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/payment/{id}")
+	ResponseResult<Payment> findByIdPaymentByDB(@PathVariable int id){
+
+		String mgs;
+		Payment payment = paymentService.findById(id);
+		if (payment != null) {
+			mgs = "Payment cần tìm .";
+		} else {
+			mgs = "ko tìm thấy Payment.";
+		}
+		return new ResponseResult<Payment>(mgs, payment);
 	}
 }

@@ -3,15 +3,21 @@ package com.shopwatch.api.service;
 import java.util.List;
 
 import com.shopwatch.api.dto.UserDTO;
+import com.shopwatch.api.dto.UserLoginDTO;
 import com.shopwatch.api.entity.User;
 
 public interface UserService {
 		
-	public User findByIdUser(int id);
+	User findByIdUser(int id);
 		
+	User findByUserName(String username);
 	
-	public List<User> findAllUserBD();
+	List<User> findAllUserBD();
 	
-	public User createUser(UserDTO userDTO);
+	User createUser(UserDTO userDTO);
+	
+	User registerUser(UserDTO userDTO);
+	
+	User loginUser(UserLoginDTO userLoginDTO);
 	
 }
