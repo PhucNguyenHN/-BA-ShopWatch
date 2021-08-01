@@ -40,7 +40,6 @@ public class CartServiceImpl implements CartService{
 			}else{
 				cart.setUser(null);
 			}
-			cart.setPayment(null);
 			cart.setStatus(true);
 			cart.setCreate_at(datetimeNow);
 			cart.setUpdate_at(datetimeNow);

@@ -19,6 +19,7 @@ public class CustomUserDetailService implements UserDetailsService{
 	public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		User user = userService.findByUserName(username);
+		
 		return CustomUserDetails.fromUserToCustomUserDetails(user);
 	}
 	

@@ -32,10 +32,6 @@ public class Cart {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name = "payment_id")
-	private Payment payment;
-	
 	private boolean status;
 	
 	@Temporal(TemporalType.TIMESTAMP)

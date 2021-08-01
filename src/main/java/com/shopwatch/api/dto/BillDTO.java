@@ -6,6 +6,7 @@ import lombok.Data;
 public class BillDTO {
 	private int id;
 	private String cart_id;
+	private int payment_id;
 	private String fullname;
 	private String phone;
 	private String email;

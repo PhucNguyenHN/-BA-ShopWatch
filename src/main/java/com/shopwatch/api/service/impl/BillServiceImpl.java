@@ -14,10 +14,12 @@ import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.dto.ProductCartDTO;
 import com.shopwatch.api.entity.Bill;
 import com.shopwatch.api.entity.Cart;
+import com.shopwatch.api.entity.Payment;
 import com.shopwatch.api.entity.Product;
 import com.shopwatch.api.entity.ProductCart;
 import com.shopwatch.api.repository.BillRepository;
 import com.shopwatch.api.repository.CartRepository;
+import com.shopwatch.api.repository.PaymentRepository;
 import com.shopwatch.api.repository.ProductRepository;
 import com.shopwatch.api.service.BillService;
 import com.shopwatch.api.service.CartService;
@@ -36,6 +38,8 @@ public class BillServiceImpl implements BillService {
 	private CartService cartService;
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private PaymentRepository paymentRepository;
 	
 	@Override
 	public Bill findBillById(int id) {
@@ -48,6 +52,7 @@ public class BillServiceImpl implements BillService {
 	public Bill createNewBill(BillDTO billDTO) {
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
+		Payment payment = paymentRepository.findById(billDTO.getPayment_id());
 		Cart cart = cartRepository.findById(Integer.parseInt(billDTO.getCart_id()));
 		Bill bill = new Bill();
 		bill.setCart(cart);
@@ -57,6 +62,7 @@ public class BillServiceImpl implements BillService {
 		bill.setAddress(billDTO.getAddress());
 		bill.setTotal_money(billDTO.getTotal_money());
 		bill.setStatus_bill(0);
+		bill.setPayment(payment);
 		bill.setUpdate_at(datetimeNow);
 		bill.setCreate_at(datetimeNow);
 		

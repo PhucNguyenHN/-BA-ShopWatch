@@ -36,6 +36,10 @@ public class Bill {
 	private int total_money;
 	private int status_bill;
 	
+	@ManyToOne
+	@JoinColumn(name = "payment_id")
+	private Payment payment;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "YYYY-MM-DD HH:MI:SS")
 	private Date create_at;

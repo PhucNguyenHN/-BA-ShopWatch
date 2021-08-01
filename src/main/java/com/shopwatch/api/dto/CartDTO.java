@@ -6,5 +6,4 @@ import lombok.Data;
 public class CartDTO {
 	private int id;
 	private String user_id;
-	private int payment_id;
 }
