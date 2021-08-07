@@ -175,6 +175,24 @@ public class BillServiceImpl implements BillService {
 		return null;
 	}
 
+	@Override
+	public Bill updateProductBill(BillProductDTO billProductDTO) {
+		// TODO Auto-generated method stub
+		Bill bill = billRepository.findById(billProductDTO.getBill_id());
+		if (bill != null) {
+			Cart cart = bill.getCart();
+			ProductCartDTO productCartDTO = new ProductCartDTO();
+			productCartDTO.setCart_id(String.valueOf(cart.getId()));
+			productCartDTO.setProduct_id(billProductDTO.getProduct_id());
+			productCartDTO.setQuantity(billProductDTO.getQuantity());
+			productCartService.addProductCart(productCartDTO);
+			
+			return billRepository.save(bill);
+			
+		}
+		return null;
+	}
+
 
 
 }

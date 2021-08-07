@@ -5,17 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shopwatch.api.controller.result.LoginResponseResult;
 import com.shopwatch.api.controller.result.ResponseResult;
-import com.shopwatch.api.dto.BrandDTO;
+import com.shopwatch.api.dto.UpdateUserDTO;
 import com.shopwatch.api.dto.UserDTO;
 import com.shopwatch.api.dto.UserLoginDTO;
-import com.shopwatch.api.entity.Brand;
 import com.shopwatch.api.entity.User;
 import com.shopwatch.api.security.jwt.JwtProvider;
 import com.shopwatch.api.service.UserService;
@@ -35,6 +36,21 @@ public class UserController {
 	public List<User> getAllUser() {
 		
 		return userService.findAllUserBD();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/user/{id}")
+	public ResponseResult<User> getAllUserByID(@PathVariable int id) {
+		
+		String mgs;
+		User user = userService.findByIdUser(id);
+		if (user != null) {
+			mgs = "User cần tìm!";
+		} else {
+			mgs = "Id User ko tồn tại!";
+		}
+
+		return new ResponseResult<User>(mgs, user);
 	}
 	
 	@CrossOrigin
@@ -68,8 +84,22 @@ public class UserController {
 	
 	@CrossOrigin
 	@PostMapping("/user")
-	public User createUsser(@RequestBody UserDTO userDTO) {
+	User createUser(@RequestBody UserDTO userDTO) {
 		
 		return userService.createUser(userDTO);
+	}
+	
+	@CrossOrigin
+	@PutMapping("/user")
+	ResponseResult<User> updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+		String mgs;
+		User user = userService.updateUser(updateUserDTO);
+		if (user != null) {
+			mgs = "Cập nhật User thành công!";
+		} else {
+			mgs = "Cập nhật User thất bại!";
+		}
+		
+		return new ResponseResult<User>(mgs, user);
 	}
 }

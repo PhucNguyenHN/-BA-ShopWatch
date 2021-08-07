@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.shopwatch.api.dto.UpdateUserDTO;
 import com.shopwatch.api.dto.UserDTO;
 import com.shopwatch.api.dto.UserLoginDTO;
 import com.shopwatch.api.entity.Role;
@@ -93,6 +94,22 @@ public class UserServiceImpl implements UserService{
 			return userRepository.save(user);
 			
 		}
+		return null;
+	}
+
+	@Override
+	public User updateUser(UpdateUserDTO updateUserDTO) {
+		// TODO Auto-generated method stub
+		Date datetimeNow = new Date();
+		User user = userRepository.findById(updateUserDTO.getId());
+		if (user != null) {
+			user.setFullname(updateUserDTO.getFullname());
+			user.setPhone(updateUserDTO.getPhone());
+			user.setAddress(updateUserDTO.getAddress());
+			user.setUpdate_at(datetimeNow);
+			return userRepository.save(user);
+		}
+		
 		return null;
 	}
 	

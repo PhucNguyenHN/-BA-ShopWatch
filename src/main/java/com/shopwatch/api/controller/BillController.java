@@ -152,4 +152,17 @@ public class BillController {
 		return new ResponseResult<Bill>(mgs, bill);
 	}
 	
+	@CrossOrigin
+	@PutMapping("/bill/updateProduct")
+	ResponseResult<Bill> UpdateProductBill(@RequestBody BillProductDTO billProductDTO){
+		String mgs;
+		Bill bill = billService.updateProductBill(billProductDTO);
+		if (bill != null) {
+			mgs = "Update Product Hóa đơn thành công!";
+		} else {
+			mgs = "Update Product Hóa đơn thất bại!";
+		}
+		return new ResponseResult<Bill>(mgs, bill);
+	}
+	
 }

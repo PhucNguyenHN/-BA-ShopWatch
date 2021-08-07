@@ -24,6 +24,8 @@ public interface BillService {
 	
 	Bill updateProfileBill(BillUpdateDTO billUpdateDTO);
 	
+	Bill updateProductBill(BillProductDTO billProductDTO);
+	
 	List<BillResult> selectAllBill();
 	
 	Bill changeBillProduct(BillProductDTO billProductDTO);
