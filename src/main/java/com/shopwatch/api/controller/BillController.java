@@ -113,6 +113,19 @@ public class BillController {
 	}
 	
 	@CrossOrigin
+	@PutMapping("/bill/packBill/{id}")
+	ResponseResult<Bill> UpdatePackBill(@PathVariable int id){
+		String mgs;
+		Bill bill = billService.changePackBill(id);
+		if (bill != null) {
+			mgs = "Chuyển trạng thái ĐÓNG GÓI thành công!";
+		} else {
+			mgs = "Chuyển trạng thái ĐÓNG GÓI thất bại!";
+		}
+		return new ResponseResult<Bill>(mgs, bill);
+	}
+	
+	@CrossOrigin
 	@PostMapping("/createbillproduct")
 	ResponseResult<Bill> createBillProduct(@RequestBody BillProductDTO billProductDTO){
 		String mgs;

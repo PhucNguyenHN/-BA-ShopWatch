@@ -82,7 +82,7 @@ public class BillServiceImpl implements BillService {
 	}
 
 	@Override
-	public Bill changeDeliveryBill(int id) {
+	public Bill changePackBill(int id) {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
@@ -92,11 +92,21 @@ public class BillServiceImpl implements BillService {
 	}
 	
 	@Override
-	public Bill changeContinueBill(int id) {
+	public Bill changeDeliveryBill(int id) {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(2);
+		bill.setUpdate_at(datetimeNow);
+		return billRepository.save(bill);
+	}
+	
+	@Override
+	public Bill changeContinueBill(int id) {
+		// TODO Auto-generated method stub
+		Date datetimeNow = new Date();
+		Bill bill = billRepository.findById(id);
+		bill.setStatus_bill(3);
 		bill.setUpdate_at(datetimeNow);
 		return billRepository.save(bill);
 	}
@@ -106,7 +116,7 @@ public class BillServiceImpl implements BillService {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
-		bill.setStatus_bill(3);
+		bill.setStatus_bill(4);
 		bill.setUpdate_at(datetimeNow);
 		return billRepository.save(bill);
 	}
@@ -164,6 +174,7 @@ public class BillServiceImpl implements BillService {
 		}
 		return null;
 	}
+
 
 
 }

@@ -14,6 +14,8 @@ public interface BillService {
 	
 	Bill createNewBill(BillDTO billDTO);
 	
+	Bill changePackBill(int id);
+	
 	Bill changeDeliveryBill(int id);
 	
 	Bill changeContinueBill(int id);
