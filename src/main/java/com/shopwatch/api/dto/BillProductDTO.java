@@ -6,5 +6,4 @@ import lombok.Data;
 public class BillProductDTO {
 	private int bill_id;
 	private int product_id;
-	private int quantity;
 }

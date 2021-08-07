@@ -133,7 +133,7 @@ public class BillServiceImpl implements BillService {
 			ProductCartDTO productCartDTO = new ProductCartDTO();
 			productCartDTO.setCart_id(String.valueOf(cart.getId()));
 			productCartDTO.setProduct_id(billProductDTO.getProduct_id());
-			productCartDTO.setQuantity(billProductDTO.getQuantity());
+			productCartDTO.setQuantity(1);
 
 			productCartService.addProductCart(productCartDTO);
 			
@@ -145,7 +145,7 @@ public class BillServiceImpl implements BillService {
 			Cart cart = cartService.createCart(cartDTO);
 			productCartDTO.setCart_id(String.valueOf(cart.getId()));
 			productCartDTO.setProduct_id(billProductDTO.getProduct_id());
-			productCartDTO.setQuantity(billProductDTO.getQuantity());
+			productCartDTO.setQuantity(1);
 
 			productCartService.addProductCart(productCartDTO);
 			
@@ -184,7 +184,7 @@ public class BillServiceImpl implements BillService {
 			ProductCartDTO productCartDTO = new ProductCartDTO();
 			productCartDTO.setCart_id(String.valueOf(cart.getId()));
 			productCartDTO.setProduct_id(billProductDTO.getProduct_id());
-			productCartDTO.setQuantity(billProductDTO.getQuantity());
+			productCartDTO.setQuantity(1);
 			productCartService.addProductCart(productCartDTO);
 			
 			return billRepository.save(bill);
