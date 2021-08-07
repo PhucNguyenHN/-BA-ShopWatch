@@ -17,11 +17,8 @@ import com.shopwatch.api.controller.result.ResponseResult;
 import com.shopwatch.api.dto.BillDTO;
 import com.shopwatch.api.dto.BillProductDTO;
 import com.shopwatch.api.dto.BillUpdateDTO;
-import com.shopwatch.api.dto.CartDTO;
 import com.shopwatch.api.entity.Bill;
-import com.shopwatch.api.entity.Cart;
 import com.shopwatch.api.service.BillService;
-import com.shopwatch.api.service.CartService;
 
 @CrossOrigin("*")
 @RestController
