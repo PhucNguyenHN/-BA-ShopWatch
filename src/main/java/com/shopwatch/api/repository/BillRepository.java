@@ -17,6 +17,6 @@ public interface BillRepository extends JpaRepository<Bill, Integer>{
 	@Query(value = "select * from Bill b where b.status = ?1", nativeQuery = true)
 	List<Bill> customSelectBill(boolean status);
 	
-	@Query("select new com.shopwatch.api.controller.result.BillResult(b.id, b.fullname, b.phone, b.email, b.address, b.total_money, b.status_bill, b.create_at) from Bill b")
+	@Query("select new com.shopwatch.api.controller.result.BillResult(b.id, b.fullname, b.phone, b.email, b.address, b.total_money, b.status_bill, b.create_at) from Bill b order by b.status_bill ASC, b.create_at DESC")
 	List<BillResult> selectAllBillResult();
 }
