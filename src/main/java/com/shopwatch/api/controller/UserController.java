@@ -2,6 +2,8 @@ package com.shopwatch.api.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import com.shopwatch.api.dto.UpdateUserDTO;
 import com.shopwatch.api.dto.UserDTO;
 import com.shopwatch.api.dto.UserLoginDTO;
 import com.shopwatch.api.entity.User;
+import com.shopwatch.api.mail.MailSend;
 import com.shopwatch.api.security.jwt.JwtProvider;
 import com.shopwatch.api.service.UserService;
 
@@ -31,6 +34,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private JwtProvider jwtProvider;
+	@Autowired
+	private MailSend mailSend;
 	
 	@CrossOrigin
 	@GetMapping("/user")
@@ -72,11 +77,12 @@ public class UserController {
 	
 	@CrossOrigin
 	@PostMapping("/register")
-	ResponseResult<User> RegisterUser(@RequestBody UserDTO userDTO) {
+	ResponseResult<User> RegisterUser(@RequestBody UserDTO userDTO) throws MessagingException {
 		String mgs;
 		User user = userService.registerUser(userDTO);
 		if (user != null) {
 			mgs = "Đăng Ký thành công!";
+			mailSend.sendMailRegister(userDTO.getEmail());
 		} else {
 			mgs = "Đăng Ký thất bại, e-mail này đã đc đăng ký!!! ";
 		}
