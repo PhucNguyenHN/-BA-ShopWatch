@@ -201,6 +201,7 @@ public class BillServiceImpl implements BillService {
 	public Bill createBill() {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
+		Payment payment = paymentRepository.findById(2);
 		Bill bill = new Bill();
 		Cart cart = new Cart();
 		cart.setStatus(true);
@@ -210,6 +211,7 @@ public class BillServiceImpl implements BillService {
 		
 		bill.setCart(cartrs);
 		bill.setStatus_bill(0);
+		bill.setPayment(payment);
 		bill.setUpdate_at(datetimeNow);
 		bill.setCreate_at(datetimeNow);
 		

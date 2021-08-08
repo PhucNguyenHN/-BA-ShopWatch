@@ -16,4 +16,5 @@ public class BillResult {
 	private int total_money;
 	private int status_bill;
 	private Date create_at;
+	private String payment;
 }
