@@ -176,4 +176,18 @@ public class BillController {
 		return new ResponseResult<Bill>(mgs, bill);
 	}
 	
+	@CrossOrigin
+	@GetMapping("/getbill/{id}")
+	ResponseResult<List<BillResult>> getBillByUserId(@PathVariable int id){
+		String mgs;
+		List<BillResult> listBill = billService.getBillByUserId(id);
+		if (listBill != null) {
+			mgs = "Tất cả các Bill theo User ID.";
+		} else {
+			mgs = "Ko có Bill nào của userId này!!!";
+		}
+		
+		return new ResponseResult<List<BillResult>>(mgs, listBill);
+	}
+	
 }

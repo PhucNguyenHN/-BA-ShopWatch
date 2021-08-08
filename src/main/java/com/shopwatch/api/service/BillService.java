@@ -12,6 +12,8 @@ public interface BillService {
 	
 	Bill findBillById(int id);
 	
+	List<BillResult> getBillByUserId(int id);
+	
 	Bill createBill();
 	
 	Bill createNewBill(BillDTO billDTO);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shopwatch.api.controller.result.LoginResponseResult;
 import com.shopwatch.api.controller.result.ResponseResult;
+import com.shopwatch.api.dto.ChangePassDTO;
 import com.shopwatch.api.dto.UpdateUserDTO;
 import com.shopwatch.api.dto.UserDTO;
 import com.shopwatch.api.dto.UserLoginDTO;
@@ -78,6 +79,19 @@ public class UserController {
 			mgs = "Đăng Ký thành công!";
 		} else {
 			mgs = "Đăng Ký thất bại, e-mail này đã đc đăng ký!!! ";
+		}
+		return new ResponseResult<User>(mgs, user);
+	}
+	
+	@CrossOrigin
+	@PostMapping("/changePassword")
+	ResponseResult<User> changePassword(@RequestBody ChangePassDTO changePassDTO) {
+		String mgs;
+		User user = userService.changePassword(changePassDTO);
+		if (user != null) {
+			mgs = "Password đã được thay đổi!";
+		} else {
+			mgs = "Đổi Password thất bại, vui lòng kiểm tra lại mật khẩu cũ !!! ";
 		}
 		return new ResponseResult<User>(mgs, user);
 	}

@@ -17,10 +17,12 @@ import com.shopwatch.api.entity.Cart;
 import com.shopwatch.api.entity.Payment;
 import com.shopwatch.api.entity.Product;
 import com.shopwatch.api.entity.ProductCart;
+import com.shopwatch.api.entity.User;
 import com.shopwatch.api.repository.BillRepository;
 import com.shopwatch.api.repository.CartRepository;
 import com.shopwatch.api.repository.PaymentRepository;
 import com.shopwatch.api.repository.ProductRepository;
+import com.shopwatch.api.repository.UserRepository;
 import com.shopwatch.api.service.BillService;
 import com.shopwatch.api.service.CartService;
 import com.shopwatch.api.service.ProductCartService;
@@ -36,6 +38,8 @@ public class BillServiceImpl implements BillService {
 	private ProductCartService productCartService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private ProductRepository productRepository;
 	@Autowired
@@ -211,6 +215,17 @@ public class BillServiceImpl implements BillService {
 		
 		
 		return billRepository.save(bill);
+	}
+
+	@Override
+	public List<BillResult> getBillByUserId(int id) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findById(id);
+		if (user != null) {
+			List<BillResult> listBillResults = billRepository.selectAllBillByUser(user);
+			return listBillResults;
+		}
+		return null;
 	}
 
 
