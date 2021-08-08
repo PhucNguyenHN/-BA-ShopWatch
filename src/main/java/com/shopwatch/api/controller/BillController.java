@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -178,16 +179,30 @@ public class BillController {
 	
 	@CrossOrigin
 	@GetMapping("/getbill/{id}")
-	ResponseResult<List<BillResult>> getBillByUserId(@PathVariable int id){
+	ResponseResult<List<Bill>> getBillByUserId(@PathVariable int id){
 		String mgs;
-		List<BillResult> listBill = billService.getBillByUserId(id);
+		List<Bill> listBill = billService.getBillByUserId(id);
 		if (listBill != null) {
 			mgs = "Tất cả các Bill theo User ID.";
 		} else {
 			mgs = "Ko có Bill nào của userId này!!!";
 		}
 		
-		return new ResponseResult<List<BillResult>>(mgs, listBill);
+		return new ResponseResult<List<Bill>>(mgs, listBill);
+	}
+	
+	@CrossOrigin
+	@DeleteMapping("/bill/{id}")
+	ResponseResult<Object> deleteBillByID(@PathVariable int id){
+		String mgs;
+		boolean delete = billService.deleteBillByID(id);
+		if (delete) {
+			mgs = "Xóa Bill thành Công !!!";
+		} else {
+			mgs = "Xóa Bill Thất bại!!!";
+		}
+		
+		return new ResponseResult<Object>(mgs, null);
 	}
 	
 }

@@ -12,7 +12,7 @@ public interface BillService {
 	
 	Bill findBillById(int id);
 	
-	List<BillResult> getBillByUserId(int id);
+	List<Bill> getBillByUserId(int id);
 	
 	Bill createBill();
 	
@@ -33,4 +33,6 @@ public interface BillService {
 	List<BillResult> selectAllBill();
 	
 	Bill changeBillProduct(BillProductDTO billProductDTO);
+	
+	boolean deleteBillByID(int id);
 }

@@ -220,14 +220,33 @@ public class BillServiceImpl implements BillService {
 	}
 
 	@Override
-	public List<BillResult> getBillByUserId(int id) {
+	public List<Bill> getBillByUserId(int id) {
 		// TODO Auto-generated method stub
 		User user = userRepository.findById(id);
 		if (user != null) {
-			List<BillResult> listBillResults = billRepository.selectAllBillByUser(user);
+			List<Bill> listBillResults = billRepository.findByCartUser(user);
 			return listBillResults;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean deleteBillByID(int id) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		Bill bill = billRepository.findById(id);
+		if (bill != null) {
+		try {
+			
+				billRepository.delete(bill);
+				flag = true;
+			
+		} catch (Exception e) {
+			flag = false;
+		}
+		}
+		
+		return flag;
 	}
 
 
