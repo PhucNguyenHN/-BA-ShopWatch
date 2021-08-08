@@ -12,6 +12,8 @@ public interface BillService {
 	
 	Bill findBillById(int id);
 	
+	Bill createBill();
+	
 	Bill createNewBill(BillDTO billDTO);
 	
 	Bill changePackBill(int id);

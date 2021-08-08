@@ -71,6 +71,20 @@ public class BillController {
 	}
 	
 	@CrossOrigin
+	@PostMapping("/creatbill")
+	ResponseResult<Bill> createBill(){
+		String mgs;
+		Bill bill = billService.createBill();
+		if (bill != null) {
+			mgs = "Tạo mới Bill thành công!";
+		} else {
+			mgs = "Tạo mới Bill thất bại!";
+		}
+		
+		return new ResponseResult<Bill>(mgs, bill);
+	}
+	
+	@CrossOrigin
 	@PutMapping("/bill/continueBill/{id}")
 	ResponseResult<Bill> UpdateContinueBill(@PathVariable int id){
 		String mgs;

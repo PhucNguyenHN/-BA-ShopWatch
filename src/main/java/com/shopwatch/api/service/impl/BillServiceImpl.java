@@ -193,6 +193,26 @@ public class BillServiceImpl implements BillService {
 		return null;
 	}
 
+	@Override
+	public Bill createBill() {
+		// TODO Auto-generated method stub
+		Date datetimeNow = new Date();
+		Bill bill = new Bill();
+		Cart cart = new Cart();
+		cart.setStatus(true);
+		cart.setCreate_at(datetimeNow);
+		cart.setUpdate_at(datetimeNow);
+		Cart cartrs = cartRepository.save(cart);
+		
+		bill.setCart(cartrs);
+		bill.setStatus_bill(0);
+		bill.setUpdate_at(datetimeNow);
+		bill.setCreate_at(datetimeNow);
+		
+		
+		return billRepository.save(bill);
+	}
+
 
 
 }
