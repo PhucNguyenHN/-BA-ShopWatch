@@ -2,6 +2,8 @@ package com.shopwatch.api.service;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import com.shopwatch.api.controller.result.BillResult;
 import com.shopwatch.api.dto.BillDTO;
 import com.shopwatch.api.dto.BillProductDTO;
@@ -16,15 +18,15 @@ public interface BillService {
 	
 	Bill createBill();
 	
-	Bill createNewBill(BillDTO billDTO);
+	Bill createNewBill(BillDTO billDTO) throws MessagingException;
 	
-	Bill changePackBill(int id);
+	Bill changePackBill(int id) throws MessagingException;
 	
-	Bill changeDeliveryBill(int id);
+	Bill changeDeliveryBill(int id) throws MessagingException;
 	
-	Bill changeContinueBill(int id);
+	Bill changeContinueBill(int id) throws MessagingException;
 	
-	Bill changeDoneBill(int id);
+	Bill changeDoneBill(int id) throws MessagingException;
 	
 	Bill updateProfileBill(BillUpdateDTO billUpdateDTO);
 	
@@ -32,7 +34,7 @@ public interface BillService {
 	
 	List<BillResult> selectAllBill();
 	
-	Bill changeBillProduct(BillProductDTO billProductDTO);
+	Bill changeBillProduct(BillProductDTO billProductDTO) throws MessagingException;
 	
 	boolean deleteBillByID(int id);
 }

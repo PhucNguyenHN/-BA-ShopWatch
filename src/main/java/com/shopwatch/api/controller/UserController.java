@@ -82,7 +82,7 @@ public class UserController {
 		User user = userService.registerUser(userDTO);
 		if (user != null) {
 			mgs = "Đăng Ký thành công!";
-			mailSend.sendMailRegister(userDTO.getEmail());
+			mailSend.sendMailRegister(userDTO.getEmail(),userDTO.getFullname());
 		} else {
 			mgs = "Đăng Ký thất bại, e-mail này đã đc đăng ký!!! ";
 		}

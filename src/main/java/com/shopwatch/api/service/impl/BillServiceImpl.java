@@ -3,6 +3,8 @@ package com.shopwatch.api.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.shopwatch.api.entity.Payment;
 import com.shopwatch.api.entity.Product;
 import com.shopwatch.api.entity.ProductCart;
 import com.shopwatch.api.entity.User;
+import com.shopwatch.api.mail.MailSend;
 import com.shopwatch.api.repository.BillRepository;
 import com.shopwatch.api.repository.CartRepository;
 import com.shopwatch.api.repository.PaymentRepository;
@@ -44,6 +47,8 @@ public class BillServiceImpl implements BillService {
 	private ProductRepository productRepository;
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private MailSend mailSend;
 	
 	@Override
 	public Bill findBillById(int id) {
@@ -53,7 +58,7 @@ public class BillServiceImpl implements BillService {
 	}
 
 	@Override
-	public Bill createNewBill(BillDTO billDTO) {
+	public Bill createNewBill(BillDTO billDTO) throws MessagingException {
 		Date datetimeNow = new Date();
 		// TODO Auto-generated method stub
 		Payment payment = paymentRepository.findById(billDTO.getPayment_id());
@@ -71,8 +76,10 @@ public class BillServiceImpl implements BillService {
 		bill.setCreate_at(datetimeNow);
 		
 		Bill billResuft = billRepository.save(bill);
+		
 		if (billResuft != null) {
 			cartService.changeStatusCart(cart.getId());
+			mailSend.sendMailChangeStatusBill(billResuft.getEmail(), billResuft.getStatus_bill(), billResuft.getFullname());
 			return billResuft;
 		}
 
@@ -86,48 +93,52 @@ public class BillServiceImpl implements BillService {
 	}
 
 	@Override
-	public Bill changePackBill(int id) {
+	public Bill changePackBill(int id) throws MessagingException {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(1);
 		bill.setUpdate_at(datetimeNow);
+		mailSend.sendMailChangeStatusBill(bill.getEmail(), 1, bill.getFullname());
 		return billRepository.save(bill);
 	}
 	
 	@Override
-	public Bill changeDeliveryBill(int id) {
+	public Bill changeDeliveryBill(int id) throws MessagingException {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(2);
 		bill.setUpdate_at(datetimeNow);
+		mailSend.sendMailChangeStatusBill(bill.getEmail(), 2, bill.getFullname());
 		return billRepository.save(bill);
 	}
 	
 	@Override
-	public Bill changeContinueBill(int id) {
+	public Bill changeContinueBill(int id) throws MessagingException {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(3);
 		bill.setUpdate_at(datetimeNow);
+		mailSend.sendMailChangeStatusBill(bill.getEmail(), 3, bill.getFullname());
 		return billRepository.save(bill);
 	}
 
 	@Override
-	public Bill changeDoneBill(int id) {
+	public Bill changeDoneBill(int id) throws MessagingException {
 		// TODO Auto-generated method stub
 		Date datetimeNow = new Date();
 		Bill bill = billRepository.findById(id);
 		bill.setStatus_bill(4);
 		bill.setUpdate_at(datetimeNow);
+		mailSend.sendMailChangeStatusBill(bill.getEmail(), 4, bill.getFullname());
 		return billRepository.save(bill);
 	}
 
 	// Dang Bao tri
 	@Override
-	public Bill changeBillProduct(BillProductDTO billProductDTO) {
+	public Bill changeBillProduct(BillProductDTO billProductDTO) throws MessagingException {
 		Date datetimeNow = new Date();
 		int idBill = billProductDTO.getBill_id();
 		if (idBill != 0) {

@@ -2,6 +2,8 @@ package com.shopwatch.api.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,7 +61,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PostMapping("/bill")
-	ResponseResult<Bill> createNewBill(@RequestBody BillDTO billDTO){
+	ResponseResult<Bill> createNewBill(@RequestBody BillDTO billDTO) throws MessagingException{
 		String mgs;
 		Bill bill = billService.createNewBill(billDTO);
 		if (bill != null) {
@@ -87,7 +89,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PutMapping("/bill/continueBill/{id}")
-	ResponseResult<Bill> UpdateContinueBill(@PathVariable int id){
+	ResponseResult<Bill> UpdateContinueBill(@PathVariable int id) throws MessagingException{
 		String mgs;
 		Bill bill = billService.changeContinueBill(id);
 		if (bill != null) {
@@ -100,7 +102,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PutMapping("/bill/doneBill/{id}")
-	ResponseResult<Bill> UpdateDoneBill(@PathVariable int id){
+	ResponseResult<Bill> UpdateDoneBill(@PathVariable int id) throws MessagingException{
 		String mgs;
 		Bill bill = billService.changeDoneBill(id);
 		if (bill != null) {
@@ -113,7 +115,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PutMapping("/bill/deliveryBill/{id}")
-	ResponseResult<Bill> UpdateDeliveryBill(@PathVariable int id){
+	ResponseResult<Bill> UpdateDeliveryBill(@PathVariable int id) throws MessagingException{
 		String mgs;
 		Bill bill = billService.changeDeliveryBill(id);
 		if (bill != null) {
@@ -126,7 +128,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PutMapping("/bill/packBill/{id}")
-	ResponseResult<Bill> UpdatePackBill(@PathVariable int id){
+	ResponseResult<Bill> UpdatePackBill(@PathVariable int id) throws MessagingException{
 		String mgs;
 		Bill bill = billService.changePackBill(id);
 		if (bill != null) {
@@ -139,7 +141,7 @@ public class BillController {
 	
 	@CrossOrigin
 	@PostMapping("/createbillproduct")
-	ResponseResult<Bill> createBillProduct(@RequestBody BillProductDTO billProductDTO){
+	ResponseResult<Bill> createBillProduct(@RequestBody BillProductDTO billProductDTO) throws MessagingException{
 		String mgs;
 		Bill billProduct = billService.changeBillProduct(billProductDTO);
 		if (billProduct != null) {
